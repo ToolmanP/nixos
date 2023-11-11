@@ -1,0 +1,35 @@
+{
+  "profile": {
+    "username": "toolmanp"
+  },
+  "proxy": {
+    "host": "127.0.0.1",
+    "port": "7890"
+  },
+  "vcs": {
+    "git": {
+      "name": "Yiyang Wu",
+      "email": "toolmanp@outlook.com"
+    }
+  },
+  "desktop": {
+    "kitty": {
+      "theme": "frappe"
+    },
+    "rofi": {
+      "icon": "Dracula",
+      "theme": "Spotlight Dark"
+    },
+    "dunst": {
+      "theme": "macchiato"
+    }
+  },
+  "term": {
+    "ls-color": "frappe"
+  },
+  "common": {
+    "theme": "Dracula",
+    "icon": "Dracula",
+    "cursor": "Bibata-Modern-Classic"
+  }
+}

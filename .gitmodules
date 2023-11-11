@@ -1,0 +1,18 @@
+[submodule "home-manager/thirdparty/configurations/nvim"]
+	path = home-manager/thirdparty/configurations/nvim
+	url = git@github.com:ToolmanP/NvTLMP.git
+[submodule "home-manager/thirdparty/scripts/rofi-power-menu"]
+	path = home-manager/thirdparty/scripts/rofi-power-menu
+	url = https://github.com/jluttine/rofi-power-menu.git
+[submodule "home-manager/thirdparty/scripts/rofi-spotlight"]
+	path = home-manager/thirdparty/scripts/rofi-spotlight
+	url = https://github.com/eromatiya/rofi-spotlight.git
+[submodule "home-manager/thirdparty/themes/kitty-catppuccin"]
+	path = home-manager/thirdparty/themes/kitty-catppuccin
+	url = https://github.com/catppuccin/kitty
+[submodule "home-manager/thirdparty/themes/fcitx5-spring"]
+	path = home-manager/thirdparty/themes/fcitx5-spring
+	url = git@github.com:thep0y/fcitx5-themes.git
+[submodule "home-manager/thirdparty/themes/rofi-collection"]
+	path = home-manager/thirdparty/themes/rofi-collection
+	url = https://github.com/newmanls/rofi-themes-collection.git
