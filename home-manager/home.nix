@@ -1,5 +1,6 @@
 {pkgs, ...}:
 let 
+  pypkgs = ps: with ps; [ requests pillow aiohttp numpy pandas gitpython ];
   tex = with pkgs; texlive.combined.scheme-medium;
 in
 {
@@ -23,7 +24,6 @@ in
     packages = with pkgs; [
       imv
       mpv
-      eww
       tex
       btop
       htop
@@ -39,6 +39,7 @@ in
       pywal
       gitui
       vivid
+      rizin
       rustup
       ranger
       logseq
@@ -49,6 +50,7 @@ in
       waybar
       bemenu
       zoxide
+      pwndbg
       zathura
       pcmanfm
       lazygit
@@ -57,13 +59,17 @@ in
       obsidian
       starship
       nwg-look
+      ropgadget
       wireshark
+      libreoffice
+      eww-wayland
       pavucontrol
       go-musicfox
       microsoft-edge
       telegram-desktop
       firefox-devedition
       linux-wallpaperengine
+      (python3.withPackages(pypkgs))
     ];
   };
 
