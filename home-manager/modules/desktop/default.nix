@@ -11,7 +11,6 @@
     ./vscode.nix
     ./waybar.nix
     ./zathura.nix
-    ./xdg-desktop.nix
     ./entries.nix
     ./mimetypes.nix
   ];
