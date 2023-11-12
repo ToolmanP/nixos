@@ -1,18 +1,12 @@
-{inputs, pkgs, ... }:
-
-let 
-  global = builtins.fromJSON( builtins.readFile ../global/config.json);
-in
-
-{
-  imports = [./hardware-configuration.nix];
+{ global, pkgs, ... }:
+let pypkgs = ps: with ps; [ requests pillow aiohttp numpy pandas gitpython ];
+in {
+  imports = [ ./hardware-configuration.nix ];
 
   nixpkgs = {
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [
-       "electron-24.8.6"
-      ];
+      permittedInsecurePackages = [ "electron-24.8.6" ];
     };
   };
 
@@ -24,181 +18,158 @@ in
 
   boot = {
     loader = {
-      systemd-boot = {
-        enable = true;
-      };
-      efi = {
-        canTouchEfiVariables = true;
-      };
+      systemd-boot = { enable = true; };
+      efi = { canTouchEfiVariables = true; };
     };
 
     kernelPackages = with pkgs; linuxPackages_zen;
   };
-  
+
   environment = {
     localBinInPath = true;
     systemPackages = with pkgs; [
-        fd
-        go
-        bat
-	      zip
-  	    vim 
-        curl
-        wget
-        zsh
-        duf
-        fzf
-        git
-        lsd
-        gcc
-        ghc
-        llvm
-	      cmake
-        clash
-        unzip
-        p7zip
-        procs
-        clang
-        ocaml
-        pueue
-        minicom
-        gnumake
-        virt-manager
-        powertop
-        ripgrep
-        du-dust
-        neofetch
-        strongswan
-        subversion
-        zerotierone
-	      clang-tools
-        brightnessctl
-	      networkmanagerapplet
-      ];
+      fd
+      go
+      bat
+      zip
+      vim
+      curl
+      wget
+      zsh
+      duf
+      fzf
+      git
+      lsd
+      gcc
+      ghc
+      llvm
+      cmake
+      clash
+      unzip
+      p7zip
+      procs
+      clang
+      ocaml
+      pueue
+      psmisc
+      minicom
+      python3
+      gnumake
+      powertop
+      ripgrep
+      du-dust
+      neofetch
+      libgnurl
+      strongswan
+      subversion
+      zerotierone
+      clang-tools
+      virt-manager
+      brightnessctl
+      networkmanagerapplet
+      (python3.withPackages(pypkgs))
+    ];
   };
 
   networking = {
     hostName = "MetaNix";
     networkmanager = {
       enable = true;
-      wifi = {
-        backend = "iwd";
-      };
+      wifi = { backend = "iwd"; };
     };
   };
 
   services = {
 
-    printing = {
-      enable = true;
-    };
+    printing = { enable = true; };
 
-    flatpak = {
-      enable = true;
-    };
+    flatpak = { enable = true; };
 
     auto-cpufreq = {
       enable = true;
       settings = {
-         battery = {
-         governor = "powersave";
-         turbo = "never";
-         };
-         charger = {
-           governor = "performance";
-           turbo = "auto";
-         };
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
       };
     };
 
     xserver = {
       enable = true;
       layout = "us";
-      libinput = {
-        enable = true;
-      };
+      libinput = { enable = true; };
       displayManager = {
         sddm = {
           enable = true;
           autoNumlock = true;
-          wayland = {
-            enable = true;
-          };
+          wayland = { enable = true; };
         };
       };
     };
 
     pipewire = {
-       enable = true;
-       alsa.enable = true;
-       alsa.support32Bit = true;
-       pulse.enable = true;
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
     };
   };
 
   powerManagement = {
     enable = true;
-    powertop = {
-      enable = true;
-    };
+    powertop = { enable = true; };
     cpuFreqGovernor = "onDemand";
   };
 
-  time = {
-    timeZone = "Asia/Shanghai";
-  };
+  time = { timeZone = "Asia/Shanghai"; };
 
-  security = {
-    rtkit = {
-      enable = true;
-    };
-  };
+  security = { rtkit = { enable = true; }; };
 
   i18n = {
-   inputMethod = {
-     enabled = "fcitx5";
-     fcitx5.addons = with pkgs; [
-       fcitx5-rime
-       fcitx5-gtk
-       fcitx5-configtool
-       fcitx5-chinese-addons
-       libsForQt5.fcitx5-qt
-     ];
-   };
-   defaultLocale = "en_US.UTF-8";
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        fcitx5-rime
+        fcitx5-gtk
+        fcitx5-configtool
+        fcitx5-chinese-addons
+        libsForQt5.fcitx5-qt
+      ];
+    };
+    defaultLocale = "en_US.UTF-8";
   };
 
   programs = {
-    hyprland ={
-      enable = true;
-    };
-    mtr = {
-      enable = true;
-    };
+    hyprland = { enable = true; };
+    mtr = { enable = true; };
+    nix-ld = { enable = true; };
     gnupg = {
-        agent = {
-          enable = true;
-          enableSSHSupport = true;
-        };
+      agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
     };
-    dconf = {
-      enable = true;
-    };
+    dconf = { enable = true; };
   };
-
 
   users = {
     users = {
       ${global.profile.username} = {
+        uid = 1000;
         isNormalUser = true;
-        extraGroups = [ "audio" "video" "wheel" "docker" "networkmanager" "libvirtd" ];
+        extraGroups =
+          [ "audio" "video" "wheel" "docker" "networkmanager" "libvirtd" ];
       };
     };
   };
 
-
   fonts = {
-    packages = with pkgs;[
+    packages = with pkgs; [
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -207,38 +178,37 @@ in
       source-han-serif
       source-code-pro
       font-awesome
-      montserrat(nerdfonts.override { fonts = [ "FiraCode" "Hack" "AnonymousPro" ]; })
+      material-design-icons
+      montserrat
+      (nerdfonts.override {
+        fonts = [ "FiraCode" "Hack" "AnonymousPro" "Inconsolata" ];
+      })
     ];
   };
 
-
   virtualisation = {
-    docker = {
-      enable = true;
-    };
-    libvirtd = {
-      enable = true;
-    };
+    docker = { enable = true; };
+    libvirtd = { enable = true; };
   };
 
   hardware = {
-      opengl = {
-        driSupport = true;
-        driSupport32Bit = true;
-        extraPackages = with pkgs; [ amdvlk libva-utils vaapiVdpau ];
-      };
-      bluetooth = {
-          enable = true;
-          powerOnBoot = true;
-      };
+    opengl = {
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [ amdvlk libva-utils vaapiVdpau ];
+    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
   };
 
   system = {
-      stateVersion = "23.05";
-      copySystemConfiguration = false;
-      autoUpgrade = {
-        enable = true;
-        allowReboot = true;
-      };
+    stateVersion = "23.05";
+    copySystemConfiguration = false;
+    autoUpgrade = {
+      enable = true;
+      allowReboot = true;
+    };
   };
 }
