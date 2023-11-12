@@ -61,6 +61,7 @@ in
       nwg-look
       ropgadget
       wireshark
+      wl-clipboard
       libreoffice
       eww-wayland
       pavucontrol

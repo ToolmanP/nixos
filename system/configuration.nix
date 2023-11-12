@@ -44,6 +44,7 @@ in {
       ghc
       llvm
       cmake
+      ninja
       clash
       unzip
       p7zip
