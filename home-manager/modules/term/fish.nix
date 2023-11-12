@@ -1,7 +1,7 @@
-{pkgs, term, ...}:
+{pkgs, proxy, term, ...}:
 let 
-  proxy_host = "127.0.0.1";
-  proxy_port = "7890";
+  proxy_host = proxy.host;
+  proxy_port = proxy.port;
 in
 {
   programs.fish = {
@@ -16,7 +16,8 @@ in
       lg = "lazygit";
       gci = "git commit";
       gcl = "git clone";
-
+      j = "joshuto";
+      imshow = "kitty +kitten icat";
     };
 
     shellInit = "
