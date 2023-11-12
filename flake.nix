@@ -31,7 +31,7 @@
 
     nixosConfigurations = {
       MetaNix = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs global;};
         modules = [
 
           ./system/configuration.nix
