@@ -9,7 +9,11 @@
   "vcs": {
     "git": {
       "name": "Yiyang Wu",
-      "email": "toolmanp@outlook.com"
+      "email": "toolmanp@outlook.com",
+      "signing": {
+        "key": "D5525C621F9D24CB",
+        "signByDefault": true
+      }
     }
   },
   "desktop": {
