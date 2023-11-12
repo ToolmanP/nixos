@@ -6,6 +6,16 @@ let
 in {
   xdg.desktopEntries = {
 
+    "joshuto" = {
+      name = "joshuto";
+      exec = "joshuto %f";
+      icon = "kitty";
+      terminal = true;
+      mimeType = [ "inode/directory" ];
+      startupNotify = true;
+      settings = { StartupWMClass = "joshuto"; };
+    };
+    
     "Visual Studio Code(wayland)" = {
       name = "Visual Studio Code(Wayland)";
       actions = {

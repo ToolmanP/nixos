@@ -1,0 +1,3 @@
+{
+  "application/pdf" = ["org.pwmt.zathura.desktop"];
+}
