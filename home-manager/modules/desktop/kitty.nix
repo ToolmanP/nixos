@@ -43,7 +43,7 @@ in
 
   };
 
-  home.file.".config/kitty/tab_bar.py" = {
+  xdg.configFile."kitty/tab_bar.py" = {
     enable = true;
     source = ./scripts/kitty/tab_bar.py;
   };
