@@ -7,8 +7,8 @@
 
       general ={
         gaps_in = 5;
-        border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        border_size = 3;
+        "col.active_border" = "rgba(fba1b7ee) rgba(fff0f5dd) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         layout = "dwindle";
         allow_tearing = false;
@@ -55,19 +55,28 @@
 
       animations = {
        enabled = true; 
-       bezier = ["myBezier, 0.05, 0.9, 0.1, 1.05"];
+       bezier = [
+        "cubicBezier, 0.25, 1, 0.5, 1"
+        "easeBezier, 0.34, 1.56, 0.64, 1"
+       ];
        animation = [
-          "windows, 1, 7, myBezier"
+          "windows, 1, 7, cubicBezier"
+          "windowsIn, 1, 6, cubicBezier, slide"
           "windowsOut, 1, 7, default, popin 80%"
           "border, 1, 10, default"
           "borderangle, 1, 8, default"
           "fade, 1, 7, default"
-          "workspaces, 1, 6, default"
+          "workspaces, 1, 6, easeBezier"
        ];
       };
 
 
       windowrulev2 = [
+        "float,class:(pcmanfm)"
+        "float,class:(joshuto)"
+        "float,class:(telegram)"
+        "float,class:(imv)"
+        "float,class:(mpv)"
       ];
 
       bind = [
